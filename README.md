@@ -1,296 +1,504 @@
-================================================================================
-                    SWAG LABS AUTOMATION FRAMEWORK
-                         README DOCUMENTATION
-================================================================================
+╔══════════════════════════════════════════════════════════════════════════════╗
+║                                                                              ║
+║                   SWAG LABS AUTOMATION FRAMEWORK                            ║
+║                      Playwright Test Automation                             ║
+║                                                                              ║
+╚══════════════════════════════════════════════════════════════════════════════╝
+
+
+OVERVIEW
+─────────────────────────────────────────────────────────────────────────────
 
 A comprehensive Playwright-based test automation framework for the Swag Labs 
-demo e-commerce application. This project implements the Page Object Model (POM) 
-pattern and includes automated tests for login functionality and inventory page 
-interactions.
+demo e-commerce application (https://www.saucedemo.com/). 
 
-================================================================================
+This project implements:
+  • Page Object Model (POM) design pattern
+  • Automated login and authentication tests
+  • Inventory page interaction tests
+  • Reusable action classes
+  • Professional test reporting
+
+
+QUICK START
+─────────────────────────────────────────────────────────────────────────────
+
+1. Clone Repository
+   $ git clone <repository-url>
+   $ cd swag-labs-automation
+
+2. Install Dependencies
+   $ npm install
+
+3. Run Tests
+   $ npx playwright test
+
+4. View Report
+   $ npx playwright show-report
+
+
 TABLE OF CONTENTS
-================================================================================
+─────────────────────────────────────────────────────────────────────────────
 
-1. Project Overview
-2. Tech Stack
-3. Project Structure
-4. Prerequisites
-5. Installation
-6. Running Tests
-7. Test Cases
-8. Project Architecture
-9. Configuration
-10. Best Practices Implemented
-11. Troubleshooting
-12. Contributing
-13. Future Enhancements
-14. License
-15. Support
+  1.  Project Overview
+  2.  Tech Stack
+  3.  Project Structure
+  4.  Prerequisites
+  5.  Installation & Setup
+  6.  Running Tests
+  7.  Test Cases
+  8.  Project Architecture
+  9.  File Descriptions
+  10. Configuration
+  11. Best Practices
+  12. Troubleshooting
+  13. Contributing
+  14. Future Enhancements
+  15. Support & License
 
-================================================================================
+
 1. PROJECT OVERVIEW
-================================================================================
+─────────────────────────────────────────────────────────────────────────────
 
-This automation framework tests the Swag Labs demo website 
-(https://www.saucedemo.com/) with a focus on:
+This framework provides comprehensive automated testing for the Swag Labs 
+e-commerce demo website.
 
-- Login Functionality: Valid credentials, invalid credentials, empty fields, 
-  security (SQL Injection)
-- Inventory Page: Add to cart, remove from cart, scrolling, menu navigation, 
-  logout functionality
+Focus Areas:
+  ✓ Login & Authentication
+    - Valid credential login
+    - Invalid password handling
+    - Empty field validation
+    - SQL Injection security testing
 
-All tests are written in JavaScript using the Playwright testing framework 
-with the Page Object Model design pattern for maintainability and reusability.
+  ✓ Inventory Management
+    - Add to Cart functionality
+    - Remove from Cart functionality
+    - Product browsing & scrolling
+    - Menu navigation
+    - Logout functionality
 
-================================================================================
+
 2. TECH STACK
-================================================================================
+─────────────────────────────────────────────────────────────────────────────
 
-- Node.js - JavaScript runtime
-- Playwright - End-to-end testing framework
-- JavaScript (ES6+) - Programming language
+  Language:       JavaScript (ES6+)
+  Runtime:        Node.js (v14+)
+  Test Framework: Playwright
+  Pattern:        Page Object Model (POM)
+  Reporting:      HTML Report
 
-================================================================================
+
 3. PROJECT STRUCTURE
-================================================================================
+─────────────────────────────────────────────────────────────────────────────
 
 swag-labs-automation/
-├── pages/                          # Page Object classes
-│   ├── LoginPage.js               # Login page object
-│   └── InventoryPage.js           # Inventory page object
-├── tests/                         # Test files
-│   ├── login.spec.js              # Login test cases
-│   └── Inventory.spec.js          # Inventory test cases
-├── utils/                         # Utility files
-│   └── Actions.js                 # Base actions class
-├── playwright.config.js           # Playwright configuration
-├── package.json                   # Project dependencies
-├── .gitignore                     # Git ignore rules
-└── README.md                      # Documentation
+│
+├── pages/
+│   ├── LoginPage.js              # Login page object with test methods
+│   └── InventoryPage.js          # Inventory page object with test methods
+│
+├── tests/
+│   ├── login.spec.js             # Login test cases (5 test cases)
+│   └── Inventory.spec.js         # Inventory test cases (5 test cases)
+│
+├── utils/
+│   └── Actions.js                # Base actions class (reusable methods)
+│
+├── playwright.config.js          # Playwright configuration
+├── package.json                  # Project dependencies
+├── .gitignore                    # Git ignore rules
+└── README.md                     # GitHub documentation
 
-================================================================================
+
 4. PREREQUISITES
-================================================================================
+─────────────────────────────────────────────────────────────────────────────
 
-- Node.js (v14 or higher)
-- npm (Node Package Manager)
-- Basic knowledge of JavaScript and testing concepts
+  ✓ Node.js version 14 or higher
+  ✓ npm (Node Package Manager)
+  ✓ Basic JavaScript knowledge
+  ✓ Internet connection (for demo website)
 
-================================================================================
-5. INSTALLATION
-================================================================================
 
-Step 1: Clone the repository
-    Command: git clone <repository-url>
-    Command: cd swag-labs-automation
+5. INSTALLATION & SETUP
+─────────────────────────────────────────────────────────────────────────────
 
-Step 2: Install dependencies
-    Command: npm install
+STEP 1: Clone the Repository
+  $ git clone <repository-url>
+  $ cd swag-labs-automation
 
-This will install:
-    - @playwright/test - Playwright testing framework
-    - @types/node - TypeScript definitions for Node.js
+STEP 2: Install Dependencies
+  $ npm install
 
-================================================================================
+  This installs:
+    • @playwright/test - Playwright testing framework
+    • @types/node - TypeScript type definitions
+
+STEP 3: Verify Installation
+  $ node --version
+  $ npm --version
+  $ npx playwright --version
+
+
 6. RUNNING TESTS
-================================================================================
+─────────────────────────────────────────────────────────────────────────────
 
-Run all tests:
-    Command: npx playwright test
+RUN ALL TESTS
+  $ npx playwright test
 
-Run tests in headed mode (see browser):
-    Command: npx playwright test --headed
+RUN TESTS IN HEADED MODE (see browser)
+  $ npx playwright test --headed
 
-Run tests in UI mode (interactive):
-    Command: npx playwright test --ui
+RUN TESTS IN UI MODE (interactive dashboard)
+  $ npx playwright test --ui
 
-Run specific test file:
-    Command: npx playwright test tests/login.spec.js
+RUN SPECIFIC TEST FILE
+  $ npx playwright test tests/login.spec.js
 
-Run tests in debug mode:
-    Command: npx playwright test --debug
+RUN TESTS IN DEBUG MODE
+  $ npx playwright test --debug
 
-View test report:
-    Command: npx playwright show-report
+VIEW TEST REPORT
+  $ npx playwright show-report
 
-================================================================================
+RUN WITH SPECIFIC BROWSER
+  $ npx playwright test --project=chromium
+
+
 7. TEST CASES
-================================================================================
+─────────────────────────────────────────────────────────────────────────────
 
---- LOGIN TESTS (tests/login.spec.js) ---
+LOGIN TESTS (tests/login.spec.js)
+──────────────────────────────────
 
-Test ID: AUTH-POS-001
-Description: Login with valid credentials
-Status: PASS
+  Test ID: AUTH-POS-001
+  Name: Login with valid credentials
+  Status: ✓ PASS
+  Description: Verifies user can login with valid credentials
 
-Test ID: TC-02
-Description: Login fails with incorrect password
-Status: PASS
+  Test ID: TC-02
+  Name: Login fails with incorrect password
+  Status: ✓ PASS
+  Description: Verifies login fails with wrong password
 
-Test ID: TC-03
-Description: Login fails with empty fields
-Status: PASS
+  Test ID: TC-03
+  Name: Login fails with empty fields
+  Status: ✓ PASS
+  Description: Verifies login requires both username and password
 
-Test ID: TC-04
-Description: Password field handles maximum character limits
-Status: PASS
+  Test ID: TC-04
+  Name: Password field handles maximum character limits
+  Status: ✓ PASS
+  Description: Verifies app stability with large character input
 
-Test ID: TC-05
-Description: Login resilience against SQL Injection strings
-Status: PASS
+  Test ID: TC-05
+  Name: Login resilience against SQL Injection
+  Status: ✓ PASS
+  Description: Verifies SQL injection strings are properly handled
 
---- INVENTORY TESTS (tests/Inventory.spec.js) ---
 
-Test ID: TC-01
-Description: Add to Cart Functionality
-Status: PASS
+INVENTORY TESTS (tests/Inventory.spec.js)
+──────────────────────────────────────────
 
-Test ID: TC-02
-Description: Scrolling Visibility
-Status: PASS
+  Test ID: TC-01
+  Name: Add to Cart Functionality
+  Status: ✓ PASS
+  Description: Verifies items can be added to cart
 
-Test ID: TC-03
-Description: Hamburger Menu Open and Close
-Status: PASS
+  Test ID: TC-02
+  Name: Scrolling Visibility
+  Status: ✓ PASS
+  Description: Verifies all products visible when scrolling
 
-Test ID: TC-04
-Description: Remove from Cart Functionality
-Status: PASS
+  Test ID: TC-03
+  Name: Hamburger Menu Open and Close
+  Status: ✓ PASS
+  Description: Verifies side menu opens and closes properly
 
-Test ID: TC-05
-Description: Logout Functionality
-Status: PASS
+  Test ID: TC-04
+  Name: Remove from Cart Functionality
+  Status: ✓ PASS
+  Description: Verifies items can be removed from cart
 
-================================================================================
+  Test ID: TC-05
+  Name: Logout Functionality
+  Status: ✓ PASS
+  Description: Verifies user can logout and loses access to inventory
+
+
 8. PROJECT ARCHITECTURE
-================================================================================
+─────────────────────────────────────────────────────────────────────────────
 
---- PAGE OBJECT MODEL (POM) ---
+PAGE OBJECT MODEL (POM) DESIGN
+──────────────────────────────
 
-This project follows the Page Object Model design pattern:
+The project follows Page Object Model pattern for maintainability:
 
-- Pages (pages/ directory): Each page/feature is represented by a class that 
-  encapsulates the locators and methods related to that page.
+  Pages/ Directory
+    └─ Contains page object classes
+    └─ Encapsulates page locators and methods
+    └─ One class per page/feature
 
-- Actions (utils/Actions.js): Base class containing reusable methods for 
-  common interactions (click, fill, getText, etc.)
+  Utils/ Directory
+    └─ Contains base Actions class
+    └─ Reusable web interaction methods
+    └─ Shared by all page objects
 
-- Tests (tests/ directory): Test cases that use the page objects to interact 
-  with the application.
+  Tests/ Directory
+    └─ Contains test specifications
+    └─ Uses page objects to interact with app
+    └─ Focuses on test logic, not implementation
 
---- FILE DESCRIPTIONS ---
+
+ARCHITECTURE DIAGRAM
+────────────────────
+
+  Tests (login.spec.js, Inventory.spec.js)
+         ↓
+  Page Objects (LoginPage.js, InventoryPage.js)
+         ↓
+  Base Actions (Actions.js)
+         ↓
+  Playwright Browser API
+
+
+9. FILE DESCRIPTIONS
+─────────────────────────────────────────────────────────────────────────────
 
 utils/Actions.js
-Base class providing common web interactions:
-  - goto(url) - Navigate to a URL
-  - fill(locator, text) - Click and fill a text field
-  - click(locator) - Click an element
-  - getText(locator) - Get text from an element
-  - isVisible(locator) - Check if element is visible
-  - scrollToBottom() - Scroll to bottom of page
+─────────────────
+Base class providing common web interactions (extended by page objects):
+
+  goto(url)
+    Navigate to a specific URL
+
+  fill(locator, text)
+    Click field, clear it, and type text
+
+  click(locator)
+    Wait for element visibility and click
+
+  getText(locator)
+    Get text content from an element
+
+  isVisible(locator)
+    Check if element is visible on page
+
+  scrollToBottom()
+    Scroll to bottom of page
+
+  scrollToTop()
+    Scroll to top of page
+
 
 pages/LoginPage.js
-Login page object with methods:
-  - openLoginPage() - Navigate to login page
-  - enterUsername(username) - Enter username
-  - enterPassword(password) - Enter password
-  - clickLoginBtn() - Click login button
-  - getErrorMessage() - Get error message
-  - closeErrorDialog() - Close error dialog
-  - isErrorVisible() - Check if error is visible
+──────────────────
+Login page object (extends Actions class):
+
+  Constructor
+    - Initializes page locators using getByTestId()
+    - Sets up: username, password, login button, error dialog
+
+  openLoginPage()
+    Navigate to login page (https://www.saucedemo.com/)
+
+  enterUsername(username)
+    Fill username field with provided text
+
+  enterPassword(password)
+    Fill password field with provided text
+
+  clickLoginBtn()
+    Click the login button
+
+  getErrorMessage()
+    Extract error message from error container
+
+  closeErrorDialog()
+    Close error dialog by clicking close button
+
+  isErrorVisible()
+    Check if error message is visible
+
 
 pages/InventoryPage.js
-Inventory page object with methods for:
-  - Adding/removing items from cart
-  - Navigating hamburger menu
-  - Scrolling and visibility checks
-  - Logout functionality
+──────────────────────
+Inventory page object (extends Actions class):
 
-================================================================================
-9. CONFIGURATION
-================================================================================
+  Provides methods for:
+    - Adding items to cart
+    - Removing items from cart
+    - Navigating hamburger menu
+    - Product scrolling and visibility
+    - Logout functionality
 
---- PLAYWRIGHT CONFIGURATION (playwright.config.js) ---
 
-Key settings:
-  - Test Directory: ./tests
-  - Reporter: HTML report
-  - Trace: Enabled on first retry
-  - Parallelization: Tests run in parallel for faster execution
-  - Browsers: Chromium (extensible to Firefox, WebKit)
+10. CONFIGURATION
+─────────────────────────────────────────────────────────────────────────────
 
-================================================================================
-10. BEST PRACTICES IMPLEMENTED
-================================================================================
+playwright.config.js
+─────────────────────
 
-✓ Page Object Model - Maintainable and reusable code
-✓ Descriptive Test Names - Clear test descriptions
-✓ Assertions - Proper use of expect() assertions
-✓ Error Handling - Robust error handling and validation
-✓ DRY Principle - Reusable actions in base class
-✓ Test Organization - Logical grouping of tests
+Key Settings:
 
-================================================================================
-11. TROUBLESHOOTING
-================================================================================
+  testDir: './tests'
+    └─ Directory containing test files
 
-Problem: Tests not running?
+  fullyParallel: true
+    └─ Run tests in parallel for faster execution
+
+  retries: 0 (local) / 2 (CI)
+    └─ Retry failed tests on CI environment
+
+  workers: 1 (CI) / undefined (local)
+    └─ Number of parallel workers
+
+  reporter: 'html'
+    └─ Generate HTML test report
+
+  trace: 'on-first-retry'
+    └─ Capture trace for failed tests
+
+  use:
+    ├─ testIdAttribute: 'data-test'
+    ├─ trace: 'on-first-retry'
+    └─ screenshot: 'only-on-failure'
+
+
+11. BEST PRACTICES IMPLEMENTED
+─────────────────────────────────────────────────────────────────────────────
+
+✓ Page Object Model
+  └─ Maintainable and reusable code structure
+
+✓ Descriptive Test Names
+  └─ Clear test descriptions indicating what is tested
+
+✓ Proper Assertions
+  └─ Using expect() for clear test validation
+
+✓ Error Handling
+  └─ Robust error checking and user feedback
+
+✓ DRY Principle
+  └─ Reusable methods in base Actions class
+
+✓ Test Organization
+  └─ Logical grouping of related tests
+
+✓ Wait Strategies
+  └─ Proper waits for element visibility
+
+✓ Test Independence
+  └─ Each test can run independently
+
+
+12. TROUBLESHOOTING
+─────────────────────────────────────────────────────────────────────────────
+
+ISSUE: Tests not running
+────────────────────────
 Solutions:
-  - Ensure Node.js is installed: node --version
-  - Ensure npm is installed: npm --version
-  - Reinstall dependencies: npm install
+  1. Verify Node.js: $ node --version
+  2. Verify npm: $ npm --version
+  3. Reinstall dependencies: $ npm install
+  4. Clear cache: $ npm cache clean --force
 
-Problem: Browser issues?
+ISSUE: Browser not found
+────────────────────────
 Solutions:
-  - Install Playwright browsers: npx playwright install
-  - Check internet connection for demo website access
+  1. Install Playwright browsers: $ npx playwright install
+  2. Update Playwright: $ npm install @playwright/test@latest
+  3. Check disk space
 
-Problem: Port conflicts?
+ISSUE: Tests timeout
+────────────────────
 Solutions:
-  - Ensure port 80 and 443 are not blocked (for web access)
+  1. Increase timeout in playwright.config.js
+  2. Check internet connection to demo website
+  3. Verify demo website is accessible (https://www.saucedemo.com/)
 
-================================================================================
-12. CONTRIBUTING
-================================================================================
+ISSUE: Port conflicts
+─────────────────────
+Solutions:
+  1. Ensure ports 80 and 443 are not blocked
+  2. Check firewall settings
+  3. Run tests with --headed to see actual browser
 
-1. Create a feature branch
-   Command: git checkout -b feature/your-feature
 
-2. Commit your changes
-   Command: git commit -am 'Add new feature'
+13. CONTRIBUTING
+─────────────────────────────────────────────────────────────────────────────
 
-3. Push to the branch
-   Command: git push origin feature/your-feature
+CONTRIBUTION WORKFLOW
+─────────────────────
 
-4. Create a Pull Request
+1. Create Feature Branch
+   $ git checkout -b feature/your-feature-name
 
-================================================================================
-13. FUTURE ENHANCEMENTS
-================================================================================
+2. Make Changes
+   $ [Make your code changes]
 
-- [ ] Add integration with CI/CD pipeline
-- [ ] Implement visual regression testing
-- [ ] Add performance testing
-- [ ] Expand test coverage to more pages
-- [ ] Add API testing
-- [ ] Implement data-driven testing
+3. Commit Changes
+   $ git add .
+   $ git commit -m "Add description of changes"
 
-================================================================================
-14. LICENSE
-================================================================================
+4. Push Branch
+   $ git push origin feature/your-feature-name
 
-ISC
+5. Create Pull Request
+   └─ Go to GitHub and create PR
 
-================================================================================
-15. SUPPORT
-================================================================================
+NAMING CONVENTIONS
+──────────────────
 
-For issues, questions, or suggestions, please create an issue in the 
-repository or contact the development team.
+  Branches: feature/login-enhancements, bugfix/cart-issue
+  Commits: "Add login test for locked users"
+  PRs: "Add login tests for locked user scenario"
 
-================================================================================
-                           Happy Testing!
-================================================================================
 
-End of Document
+14. FUTURE ENHANCEMENTS
+─────────────────────────────────────────────────────────────────────────────
+
+Planned Features:
+
+  [ ] CI/CD Integration (GitHub Actions, Jenkins)
+  [ ] Visual Regression Testing
+  [ ] Performance Testing
+  [ ] Extended Test Coverage
+  [ ] API Test Integration
+  [ ] Data-Driven Testing
+  [ ] Parallel Execution Optimization
+  [ ] Custom Reporters
+  [ ] Allure Reporting
+  [ ] Cross-browser Testing
+
+
+15. SUPPORT & LICENSE
+─────────────────────────────────────────────────────────────────────────────
+
+LICENSE: ISC
+
+SUPPORT
+───────
+
+For issues or questions:
+  1. Check troubleshooting section
+  2. Review test output and logs
+  3. Open GitHub issue with:
+     - Error message
+     - Steps to reproduce
+     - Environment details (OS, Node version)
+
+CONTACT
+───────
+
+Email: [your-email@example.com]
+Repository: [your-repo-url]
+
+
+─────────────────────────────────────────────────────────────────────────────
+                    Happy Testing! 🚀
+─────────────────────────────────────────────────────────────────────────────
+
+Document Generated: May 2026
+Last Updated: May 11, 2026
+Version: 1.0.0
